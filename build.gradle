@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.3'
+}
+
+mainClassName = 'me.fabian.jda.YoshiBot'
+version '1.0'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    compile 'net.dv8tion:JDA:3.8.1_456'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'com.google.guava:guava:27.0.1-jre'
+}
+
+compileJava.options.encoding = 'UTF-8'
