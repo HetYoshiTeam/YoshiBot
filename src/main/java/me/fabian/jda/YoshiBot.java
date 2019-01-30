@@ -25,6 +25,7 @@ public class YoshiBot {
         config = new Config();
         variables = new Variables();
         helpers = new Helpers(this);
+        PREFIX = config.getValue("prefix");
 
         CommandClientBuilder client = new CommandClientBuilder(this)
                 .setOwnerId(Long.parseLong(config.getValue("ownerId")))
@@ -33,9 +34,9 @@ public class YoshiBot {
                 new PingCommand(),
                 new UserInfoCommand());
 
-        JDA jda = new JDABuilder(AccountType.BOT)
+        new JDABuilder(AccountType.BOT)
                 .setAutoReconnect(true)
-                .setGame(Game.playing("+help"))
+                .setGame(Game.playing(PREFIX + "help"))
                 .setToken(config.getValue("token"))
                 .addEventListener(client.build())
                 .build();

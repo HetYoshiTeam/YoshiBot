@@ -1,7 +1,5 @@
 package me.fabian.jda.managers;
 
-import gnu.trove.map.TObjectIntMap;
-import gnu.trove.map.hash.TObjectIntHashMap;
 import me.fabian.jda.YoshiBot;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.ChannelType;
@@ -9,21 +7,19 @@ import net.dv8tion.jda.core.events.ShutdownEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CommandClientImpl extends ListenerAdapter implements CommandClient {
 
-    private final TObjectIntMap<String> commandIndex;
+    private final Map<String, Integer> commandIndex;
     private final List<Command> commands;
     private final YoshiBot yoshiBot;
 
     public CommandClientImpl(YoshiBot yoshiBot, long ownerId, List<Command> commands) {
         if (ownerId == -1)
             throw new IllegalArgumentException("Owner ID was set null or not set! Please provide an User ID to register as the owner!");
-        this.commandIndex = new TObjectIntHashMap<>();
+        this.commandIndex = new IdentityHashMap<>();
         this.commands = new ArrayList<>();
         this.yoshiBot = yoshiBot;
         for (Command command : commands) {

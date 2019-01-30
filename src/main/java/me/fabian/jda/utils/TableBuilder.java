@@ -1,21 +1,14 @@
-package me.tenzing.jda.utils;
+package me.fabian.jda.utils;
 
-import gnu.trove.map.TIntIntMap;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntIntHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 public class TableBuilder {
 
 
     private List<String> headerRow = new ArrayList<>();
-    private TIntObjectMap<List<String>> valueRows = new TIntObjectHashMap<>();
-    private TIntIntMap columnWidth = new TIntIntHashMap();
+    private Map<Integer, List<String>> valueRows = new IdentityHashMap<>();
+    private Map<Integer, Integer> columnWidth = new IdentityHashMap<>();
     private List<String> footerRow = new ArrayList<>();
     private boolean split;
     private String spaces = "                                                                        ";
@@ -53,7 +46,7 @@ public class TableBuilder {
     }
 
     public List<String> build() {
-        if (valueRows.valueCollection().stream().anyMatch(array -> array.size() > headerRow.size())) {
+        if (valueRows.values().stream().anyMatch(array -> array.size() > headerRow.size())) {
             throw new IllegalArgumentException("A value row cannot have more values then the header (you can make empty header slots)");
         }
 

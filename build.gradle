@@ -21,6 +21,7 @@ dependencies {
     compile 'net.dv8tion:JDA:3.8.1_456'
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'com.google.guava:guava:27.0.1-jre'
+    compile 'org.json:json:20180813'
 }
 
 compileJava.options.encoding = 'UTF-8'
